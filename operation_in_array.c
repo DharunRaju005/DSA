@@ -1,4 +1,4 @@
-//1.Searching element in Array
+//1.Searching element in Array (Linear search)
 
 // #include<stdio.h>
 // int main(){
@@ -21,7 +21,38 @@
 // }
 
 
+//Binary search
+
+
+// #include<stdio.h>
+// int main(){
+//     int a[10]={1,2,3,4,5,6,7,8,9,10};
+//     int find=0;
+//     int left=0;
+//     int right=9;
+//     int flg=0;
+//     while(left<=right){
+//         int mid=left+((right-left)/2);
+//         if(a[mid]==find){
+//             printf("True");
+//             flg++;
+//             break;
+//             }
+//         else if(a[mid]>find){
+//             right=mid-1;
+//             }
+//         else if(a[mid]<find){
+//             left=mid+1;
+//             }
+//     }
+//     if(flg==0){
+//         printf("Not found!!");
+//     }
+// }
+
+
 //2.Inserting,removing,len
+
 // #include<stdio.h>
 // #include<stdlib.h>
 // int main(){
