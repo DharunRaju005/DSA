@@ -50,6 +50,34 @@
 //     }
 // }
 
+//Binary Serach using recurson
+
+// int bis(int a[],int size,int left,int right,int find){
+//     if(left<=right){
+//         int mid=left+((right-left)/2);
+//         if(a[mid]==find){
+//             return a[mid]+1;
+//         }
+//         else if(a[mid]>find){
+//             right=mid-1;
+//         }
+//         else if(a[mid]<find){
+//             left=mid+1;
+//         }
+//     }
+//     return bis(a,size,left,right,find);
+// }
+
+
+// #include<stdio.h>
+// int main(){
+// int a[5]={1,2,3,4,6};
+// int ans=0;
+// int right=4,left=0,size=5,find=4;
+// ans=bis(a,size,left,right,find);
+// printf("%d",ans);
+// }
+
 
 //2.Inserting,removing,len
 
@@ -147,6 +175,34 @@
 //     }
 // }
 
+
+//bubble sort using recursive
+
+// void bubble(int*a,int size){
+//     if(size==1){
+//         return;
+//     }
+//     for(int i=0;i<size-1;i++){
+//         if(a[i]<a[i+1]){
+//             int *temp=a[i];
+//             (a[i])=a[i+1];
+//             a[i+1]=temp;
+//         }
+//     }
+//     size--;
+//     return bubble(a,size);
+// }
+
+// #include <stdio.h>
+// int main()
+// {
+//     int a[5]={6,5,8,3,2};
+//     int size=sizeof(a)/sizeof(a[0]);
+//     bubble(a,size);
+//     for(int i=0;i<size;i++){
+//         printf("%d ",a[i]);
+//     }
+// }
 
 //Sorting using insertion sort
 // #include<stdio.h>
