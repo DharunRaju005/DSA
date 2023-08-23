@@ -205,22 +205,25 @@
 // }
 
 //Sorting using insertion sort
+
+
 // #include<stdio.h>
 // int main(){
 //     int n=5;
-//     int nums[5]={7,2,3,4,5};
-//     for(int i=0;i<5;i++){
-//         int key=nums[i];
-//         int j=i-1;
-//         while (j >= 0 && nums[j] > key) {
-//             nums[j + 1] = nums[j];
+//     int j=0;
+//     int nums[5]={1,2,3,48,12};
+//     for(int i=0;i<n;i++){
+//         int key=nums[i+1];
+//         j=i;
+//         while(j>=0 && nums[j]<key){
+//             nums[j+1]=nums[j];
 //             j--;
 //         }
-//         nums[j + 1] = key;
+//         nums[j+1]=key;
 //     }
-//     for(int i=0;i<5;i++){
-//        printf("%d ",nums[i]);
-//      }
+//       for(int i=0;i<n;i++){
+//         printf("%d ",nums[i]);
+//     }
 //     }
 
 //5.Retrieve a numerical array from an alphanumeric array
