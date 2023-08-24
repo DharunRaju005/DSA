@@ -23,32 +23,32 @@
 
 //insertion using recursion
 
-#include<stdio.h>
-static int x;
+// #include<stdio.h>
+// static int x;
 
-void insertion(int* ans,int size){
+// void insertion(int* ans,int size){
     
-    if(size==1){
-        return;
-    }
-    int key=ans[x-size+1];
-    int j=x-size;
-    while(ans[j]>key && j>=0){
-        ans[j+1]=ans[j];
-        j--;
-    }
-    ans[j+1]=key;
-    return insertion(ans,--size);
-}
-int main(){
-    x=5;
+//     if(size==1){
+//         return;
+//     }
+//     int key=ans[x-size+1];
+//     int j=x-size;
+//     while(ans[j]>key && j>=0){
+//         ans[j+1]=ans[j];
+//         j--;
+//     }
+//     ans[j+1]=key;
+//     return insertion(ans,--size);
+// }
+// int main(){
+//     x=5;
     
-    int nums[5]={4,8,1,7,3};
-    insertion(nums,5);
-    for(int i=0;i<5;i++){
-        printf("%d ",nums[i]);
-    }
-}
+//     int nums[5]={4,8,1,7,3};
+//     insertion(nums,5);
+//     for(int i=0;i<5;i++){
+//         printf("%d ",nums[i]);
+//     }
+// }
 
 
 //Binary search
