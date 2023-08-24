@@ -21,6 +21,36 @@
 // }
 
 
+//insertion using recursion
+
+#include<stdio.h>
+static int x;
+
+void insertion(int* ans,int size){
+    
+    if(size==1){
+        return;
+    }
+    int key=ans[x-size+1];
+    int j=x-size;
+    while(ans[j]>key && j>=0){
+        ans[j+1]=ans[j];
+        j--;
+    }
+    ans[j+1]=key;
+    return insertion(ans,--size);
+}
+int main(){
+    x=5;
+    
+    int nums[5]={4,8,1,7,3};
+    insertion(nums,5);
+    for(int i=0;i<5;i++){
+        printf("%d ",nums[i]);
+    }
+}
+
+
 //Binary search
 
 
@@ -206,25 +236,25 @@
 
 //Sorting using insertion sort
 
-
 // #include<stdio.h>
 // int main(){
+//     int nums[5]={1,2,3,4,5};
 //     int n=5;
-//     int j=0;
-//     int nums[5]={1,2,3,48,12};
-//     for(int i=0;i<n;i++){
-//         int key=nums[i+1];
-//         j=i;
+//     int j;
+//     for(int i=1;i<n;i++){
+//         int key=nums[i];
+//         j=i-1;
 //         while(j>=0 && nums[j]<key){
-//             nums[j+1]=nums[j];
-//             j--;
+//                 nums[j+1]=nums[j];
+//                 j--;
 //         }
 //         nums[j+1]=key;
 //     }
-//       for(int i=0;i<n;i++){
+//     for(int i=0;i<n;i++){
 //         printf("%d ",nums[i]);
 //     }
-//     }
+// }
+
 
 //5.Retrieve a numerical array from an alphanumeric array
 
@@ -245,3 +275,40 @@
 //              printf(" ");
 //      }
 //  }
+
+
+// #include<stdio.h>
+// #include<stdlib.h>
+// #include<ctype.h>
+// #include<string.h>
+
+// int* numeri(char** a,int row,int col){
+//     int *arr = (int*) malloc(row * sizeof(int));
+//     int k;
+//     for(int i=0;i<row;i++){
+//         char temp[100]={};
+//         k=0;
+//         for(int j=0;j<col;j++){
+//             if(isdigit(a[i][j])){
+//                temp[k++]=a[i][j];
+//             }
+//         }
+//         temp[k]='\0';
+//         if(k==0){
+//             arr[i]=-1;
+//         }
+//         else{
+//              arr[i]=atoi(temp);
+//         }
+   
+//     return arr;
+//     } 
+// }
+// int main(){
+//     char a[5][20]={"Dhar12un","12a","61hd","gdsh23","hhds32"};
+//     int *ans=numeri((char**)a,5,20);
+//     for(int i=0;i<5;i++){
+//         printf("%d ",ans[i]);
+//     }
+// }
+
