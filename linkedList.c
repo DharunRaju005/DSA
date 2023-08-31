@@ -243,6 +243,8 @@
 //     display();
 // }
 
+
+//5
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -315,6 +317,48 @@ void delend(){
     del->nxt=NULL;
 }
 
+void delrandom(int pos){
+    if(pos==1){
+        delstart();
+    }
+    else{
+    struct node*del=head;
+    for(int i=1;i<pos-1 && del->nxt!=0;i++){
+        del=del->nxt;
+    }
+    struct node*del1=del->nxt->nxt;
+    struct node*tem=del->nxt;
+    del->nxt=del1;
+    free(tem);
+    //del->nxt=del->nxt->nxt;
+    //free(del->nxt);
+    }
+}
+
+void search(int item){
+    struct node*temp=head;
+    int pos=1;
+    while(temp!=0){
+        if(temp->data==item){
+            printf("Found!!\nAt position %d \n",pos);
+        }
+        pos++;
+        temp=temp->nxt;
+    }
+}
+
+void len(){
+        struct node*dis=NULL;
+        dis=head;
+        int count=0;
+        while(dis!=0){
+            count++;
+            dis=dis->nxt;
+        }
+        printf("Length of Linked list :%d\n",count);
+}
+
+
 void display(){
     struct node*dis=NULL;
     dis=head;
@@ -322,19 +366,58 @@ void display(){
         printf("%d ",dis->data);
         dis=dis->nxt;
     }
+    printf("\n");
 }
+
 int main(){
-    insertbeg(2);
-    insertbeg(10);
-    insertend(20);
-    insertend(20);
-    insertrandom(4,50);
-    insertrandom(2,50);
-    display();
-    printf("\n");
-    delstart();
-    display();
-    printf("\n");
-    delend();
-    display();
+    int loop=1,choice,item;
+    while(loop){
+        printf("Entr 1 to insert beginning\nEntr 2 to insert at end\nEntr 3 to insert at random\nEntr 4 to delstart\nEntr 5 to delete at end\nEntr 6 to delete at random position\nEntr 7 to find the length\nEntr 8 to SearchElement\nEntr 9 to display\n");
+        printf("Entr the choice : ");
+        scanf("%d",&choice);
+        //1
+        if(choice==1){
+            printf("Entr the data");
+            scanf("%d",&item);
+            insertbeg(item);
+        }
+        else if(choice==2){
+             printf("Entr the data");
+             scanf("%d",&item);
+             insertend(item);
+        }
+        else if(choice==3){
+                int pos;
+                printf("Entr the data;");
+                scanf("%d",&item);
+                printf("Entr the position");
+                scanf("%d",&pos);
+                insertrandom(pos,item);
+        }
+        else if(choice==4){
+            delstart();
+        }
+        else if(choice==5){
+            delend();
+        }
+        else if(choice==6){
+            int pos;
+            printf("Entr the position\n");
+            scanf("%d",&pos);
+            delrandom(pos);
+        }
+        else if(choice==7){
+            len();
+        }
+        else if(choice==8){
+            printf("Entr the element to search\n");
+            scanf("%d",&item);
+            search(item);
+        }
+        else{
+        display();
+        }
+        printf("Entr 1 to continue or 0 to end: ");
+        scanf("%d",&loop);
+   } 
 }
