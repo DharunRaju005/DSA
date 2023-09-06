@@ -312,7 +312,7 @@
 //         else if(choice==4){
 //             delstart();
 //         }
-//         else if(choice==5){
+//         else if(choice==5){  
 //             delend();
 //         }
 //         else if(choice==6){
