@@ -22,9 +22,10 @@ void insertbeg(int item){
     //printf("%d",new_node->prev->data);
     // new_node->nxt=NULL;
     }
+    if(tail==NULL){
+        tail=head;
+    }
     head=new_node;
-    
-    
 }
 
 void insertend(int item){
@@ -47,8 +48,51 @@ void insertrandom(int pos,int item){
     }
 }
 
+void delstart(){
+    temp=head;
+    temp->nxt->prev=NULL;
+    head=temp->nxt;
+    free(temp);
+}
+
+void delend(){
+    temp=head;
+    while(temp->nxt!=NULL){
+        temp=temp->nxt;
+    }
+    temp->prev->nxt=NULL;
+    tail=temp->prev;
+    free(temp);
+}
+
+void delrandom(int pos){
+    temp=head;
+    if(pos==1){
+        delstart(); 
+        return;
+        }
+    for(int i=1;i<=pos ;i++){
+        temp=temp->nxt;
+    }
+    temp->prev->nxt=temp->nxt;
+    temp->nxt->prev=temp->prev;
+    
+}
+
+void len(){
+    temp=head;
+    int count=0;
+    while(temp!=NULL){
+        count++;
+        temp=temp->nxt;
+    }
+    printf("The length of Linked List is %d\n",count);
+}
+
+
 void display(){
      temp=head;
+     //printf("---%d--\n",temp->data);
      while(temp!=NULL){
          printf("%d ",temp->data);
          temp=temp->nxt;
@@ -59,18 +103,23 @@ void display(){
         printf("%d ",temp->data);
         temp=temp->prev;
     }
-
+    printf("\n");
 }
 
 int main(){
     insertbeg(25);
     insertbeg(2);
     insertbeg(5);
-    insertbeg(21);
-    insertend(3);
-    insertend(45);
-    insertend(10);
-    insertend(19);
-    insertbeg(11);
+    insertbeg(51);
+    insertbeg(51);
+    insertbeg(1);
     display();
+    len();
+    // delrandom(1);
+    // //display();
+    // delstart();
+    
+    // display();
+    // delend();
+    
 }

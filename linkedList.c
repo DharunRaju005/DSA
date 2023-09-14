@@ -270,7 +270,7 @@
       int len=checkLen();
        if(len==0){
         return;
-    }
+       }
       if(pos<=(len+1)){
         if(pos==1){
             delstart();
@@ -292,6 +292,7 @@
         printf("Position doesn't exit\n");
     }
 }
+
   void search(int item){
     int len=checkLen();
     if(len==0){
@@ -337,8 +338,6 @@
             if(len==0){
                 return;
     }
-
-        
       temp=head;
       while(temp!=0){
           printf("%d ",temp->data);
@@ -392,8 +391,11 @@
              scanf("%d",&item);
              search(item);
          }
-         else{
+         else if(choice==9){
          display();
+         }
+         else{
+            printf("Entr the valid Menu '_'\n");
          }
          printf("Entr 1 to continue or 0 to end: ");
          scanf("%d",&loop);
