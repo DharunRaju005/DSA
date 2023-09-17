@@ -76,7 +76,23 @@ void delrandom(int pos){
     }
     temp->prev->nxt=temp->nxt;
     temp->nxt->prev=temp->prev;
-    
+}
+
+void search(int item){
+    int c=0,flg=0;
+    temp=head;
+    while(temp!=NULL){
+        c++;
+        if(temp->data==item){
+            printf("Found!!\nAt Pos %d\n",c);
+            flg=1;
+            return;
+        }
+        temp=temp->nxt;
+    }
+    if(flg==0){
+        printf("Not Found!!!\n");
+    }
 }
 
 void len(){
@@ -113,6 +129,7 @@ int main(){
     insertbeg(51);
     insertbeg(51);
     insertbeg(1);
+    search(25);
     display();
     len();
     // delrandom(1);
