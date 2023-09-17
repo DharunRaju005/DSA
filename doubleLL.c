@@ -29,6 +29,11 @@ void insertbeg(int item){
 }
 
 void insertend(int item){
+    
+    if(head==NULL){
+        insertbeg(item);
+        return;
+    }
     struct node*new_node=(struct node*)malloc(sizeof(struct node));
     temp=head;
     while(temp->nxt!=NULL){
@@ -45,7 +50,18 @@ void insertend(int item){
 void insertrandom(int pos,int item){
     if(pos==1){
         insertbeg(item);
+        return;
     }
+    struct node*new_node=(struct node*)malloc(sizeof(struct node));
+    temp=head;
+    for(int i=1;i<pos-1;i++){
+        temp=temp->nxt;
+    }
+    new_node->data=item;
+    new_node->nxt=temp->nxt->nxt;
+    new_node->prev=temp;
+    new_node->nxt->prev=new_node;
+    temp->nxt=new_node;
 }
 
 void delstart(){
@@ -84,7 +100,7 @@ void search(int item){
     while(temp!=NULL){
         c++;
         if(temp->data==item){
-            printf("Found!!\nAt Pos %d\n",c);
+            printf("Data %d is Found!! at Pos %d\n",item,c);
             flg=1;
             return;
         }
@@ -123,12 +139,9 @@ void display(){
 }
 
 int main(){
-    insertbeg(25);
+    insertrandom(1,34);
+    delend();
     insertbeg(2);
-    insertbeg(5);
-    insertbeg(51);
-    insertbeg(51);
-    insertbeg(1);
     search(25);
     display();
     len();
