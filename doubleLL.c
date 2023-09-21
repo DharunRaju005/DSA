@@ -23,23 +23,23 @@ struct node*tail=NULL;
           return count;
   }
 void insertbeg(int item){
-    struct node*new_node=(struct node*)malloc(sizeof(struct node));
-    new_node->prev=NULL;
-    new_node->data=item;
+    struct node*newNode=(struct node*)malloc(sizeof(struct node));
+    newNode->prev=NULL;
+    newNode->data=item;
     if(head==NULL){
-    new_node->nxt=NULL;
+    newNode->nxt=NULL;
     }
     if(tail==NULL){
-        tail=new_node;
+        tail=newNode;
     }
     else{
-    new_node->nxt=head;
-    new_node->nxt->prev=new_node;
-    //printf("%d",new_node->prev->data);
-    // new_node->nxt=NULL;
+    newNode->nxt=head;
+    newNode->nxt->prev=newNode;
+    //printf("%d",newNode->prev->data);
+    // newNode->nxt=NULL;
     }
    
-    head=new_node;
+    head=newNode;
 }
 
 void insertend(int item){
@@ -48,36 +48,36 @@ void insertend(int item){
         insertbeg(item);
         return;
     }
-    struct node*new_node=(struct node*)malloc(sizeof(struct node));
+    struct node*newNode=(struct node*)malloc(sizeof(struct node));
     temp=head;
     while(temp->nxt!=NULL){
         temp=temp->nxt;
     }
-    temp->nxt=new_node;
-    new_node->nxt=NULL;
-    new_node->data=item;
-    new_node->prev=temp;
-    tail=new_node;
+    temp->nxt=newNode;
+    newNode->nxt=NULL;
+    newNode->data=item;
+    newNode->prev=temp;
+    tail=newNode;
     //printf("%d--\n",tail->data);
 }
 
 void insertrandom(int pos,int item){
     int length=checkLen();
-    if((length+1)<=pos){
+    if((length+1)>=pos){
         if(pos==1){
             insertbeg(item);
             return;
         }
-        struct node*new_node=(struct node*)malloc(sizeof(struct node));
+        struct node*newNode=(struct node*)malloc(sizeof(struct node));
         temp=head;
         for(int i=1;i<pos-1;i++){
             temp=temp->nxt;
         }
-        new_node->data=item;
-        new_node->nxt=temp->nxt->nxt;
-        new_node->prev=temp;
-        new_node->nxt->prev=new_node;
-        temp->nxt=new_node;
+        newNode->data=item;
+        newNode->nxt=temp->nxt->nxt;
+        newNode->prev=temp;
+        newNode->nxt->prev=newNode;
+        temp->nxt=newNode;
     }
     else{
          printf("Position doesn't exit\n");
@@ -203,15 +203,19 @@ int main(){
     // delstart();
     // insertrandom(8,34);
     insertbeg(23);
+    
+    insertrandom(4,32);
+    
+
     // insertend(21);
     // delrandom(5);
     // delstart();
     // delrandom(1);
-    search(4);
+    //search(4);
     // display();
-    delend();
-    delend();
-    display();
+    // delend();
+    // delend();
+    // display();
     // insertbeg(2);
     // search(25);
     
