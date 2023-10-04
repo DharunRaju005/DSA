@@ -74,7 +74,7 @@ void insertrandom(int pos,int item){
             temp=temp->nxt;
         }
         newNode->data=item;
-        newNode->nxt=temp->nxt->nxt;
+        newNode->nxt=temp->nxt;
         newNode->prev=temp;
         newNode->nxt->prev=newNode;
         temp->nxt=newNode;
@@ -202,11 +202,15 @@ void display(){
 int main(){
     // delstart();
     // insertrandom(8,34);
-    insertbeg(23);
-    
-    insertrandom(4,32);
-    
+   insertend(23);
+   insertend(24);
+   insertend(0);
+   
 
+    
+    insertrandom(2,32);
+    
+    display();
     // insertend(21);
     // delrandom(5);
     // delstart();

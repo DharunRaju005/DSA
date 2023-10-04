@@ -33,7 +33,7 @@ int main(){
             int temp;
             printf("Entr the data");
             scanf("%d",&temp);
-            if(temp!=0){
+            if(temp>0){
                 createNewNode(temp,i,j);
             }
         }
