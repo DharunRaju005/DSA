@@ -12,39 +12,20 @@ struct node*head2=NULL;
 struct node*temp=NULL;
 struct node*temp1=NULL;
 struct node*temp2=NULL;
-
-void CreateNode1(int c,int p){
+void CreateNode(struct node** head,int c,int p){
     struct node* newNode=(struct node*)malloc(sizeof(struct node));
     newNode->prev=NULL;
     newNode->nxt=NULL;
     newNode->coeff=c;
     newNode->pow=p;
-    if(head1==NULL){
-        temp=head1=newNode;
+    if(*head==NULL){
+        temp=*head=newNode;
     }
     else{
         newNode->nxt=temp;
         temp->prev=newNode;
         temp=newNode;
-        head1=newNode;
-    }
-}
-    
-
-void CreateNode2(int c,int p){
-    struct node* newNode=(struct node*)malloc(sizeof(struct node));
-    newNode->prev=NULL;
-    newNode->nxt=NULL;
-    newNode->coeff=c;
-    newNode->pow=p;
-    if(head2==NULL){
-        temp=head2=newNode;
-    }
-    else{
-        newNode->nxt=temp;
-        temp->prev=newNode;
-        temp=newNode;
-        head2=newNode;
+        *head=newNode;
     }
 }
 
@@ -67,7 +48,7 @@ int main(){
     while(loop){
         printf("Entr the coeff and pow\n");
         scanf("%d %d",&c,&p);
-        CreateNode1(c,p);
+        CreateNode(&head1,c,p);
         printf("Want to Entr data\n");
         scanf("%d",&loop);
     }
@@ -77,7 +58,7 @@ int main(){
     while(loop){
         printf("Entr the coeff and pow\n");
         scanf("%d %d",&c,&p);
-        CreateNode2(c,p);
+        CreateNode(&head2,c,p);
         printf("Want to Entr data\n");
         scanf("%d",&loop);
     }
