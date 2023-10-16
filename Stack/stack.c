@@ -88,7 +88,7 @@ void display(struct node*head){
 
 int main(){
     n=10;
-    char str[]="12+47*/";
+    char str[]="12-";
     for(int i=0;str[i]!='\0';i++){
         if(str[i]!='+' && str[i]!='-' && str[i]!='*'&& str[i]!='/'){
             stackpush(str[i]-48);
@@ -114,7 +114,7 @@ int main(){
         else if(str[i]=='/'){
             int a=stackpop();
             int b=stackpop();
-            stackpush(a/b);
+            stackpush(b/a);
         }
         display(head);
         printf("\n");
@@ -132,6 +132,6 @@ int main(){
     // //stackpop();
     // peek();
     // //display(head);
-    // stackpush(26);
+    stackpush(26);
     //display(head);
 }
