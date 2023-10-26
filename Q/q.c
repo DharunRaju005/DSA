@@ -10,6 +10,8 @@ struct node{
 
 struct node*head=NULL;
 struct node*temp;
+struct node*rptr=NULL;
+struct node*fptr=NULL;
 
 
 void enqueue(int data){
@@ -24,13 +26,15 @@ void enqueue(int data){
     newNode->data=data;
     newNode->nxt=NULL;
     if(head==NULL){
-        temp=head=newNode;
+
+        rptr=fptr=temp=head=newNode;
         return;
     }
     else{
         temp->nxt=newNode;
+        
     }
-    temp=newNode;
+    rptr=temp=newNode;
 }
 
 void dequeue(){
@@ -44,28 +48,29 @@ void dequeue(){
     }
     count--;
     temp=head->nxt;
+    fptr=temp;
     free(head);
     head=temp;
 }
 
 void front(){
-    if(head!=NULL){
-        printf("Data at front is %d\n",head->data);
+    if(fptr!=NULL){
+        printf("Data at front is %d\n",fptr->data);
         return;
     }
     printf("The queue is Empty\n");
 }
 
 void rear(){
-    if(head==NULL){
+    if(rptr==NULL){
         printf("The Q is Empty\n");
         return;
     }
-    temp=head;
-    while(temp->nxt!=NULL){
-        temp=temp->nxt;
-    }
-    printf("Data at rear is %d\n",temp->data);
+    // temp=head;
+    // while(temp->nxt!=NULL){
+    //     temp=temp->nxt;
+    // }
+    printf("Data at rear is %d\n",rptr->data);
 }
 
 void isEmpty(){
@@ -105,6 +110,11 @@ void display(){
 int main(){
     int count=0;
     scanf("%d",&size);
+    //enqueue(4);
+    enqueue(45);
+    rear();
+    
+    front();
     dequeue();
     enqueue(4);
     enqueue(45);

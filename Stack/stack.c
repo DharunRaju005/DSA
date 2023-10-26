@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 struct node{
     int data;
     struct node*nxt;
@@ -51,6 +52,9 @@ void stackpush(int data){
 }
 
 int stackpop(){
+    if(count==0){
+        printf("The stack is empty!!\n");
+    }
     if(count==1){
         int data=head->data;
         temp = head;
@@ -78,60 +82,74 @@ void peek(){
 
 void display(struct node*head){
     if(head==NULL){
+        printf("The Stack is empty\n");
         return;
     }
     display(head->nxt);
     printf("%d ",head->data);
     
     
+    
 }
 
 int main(){
     n=10;
-    char str[]="12-";
-    for(int i=0;str[i]!='\0';i++){
-        if(str[i]!='+' && str[i]!='-' && str[i]!='*'&& str[i]!='/'){
-            stackpush(str[i]-48);
-        }
-        if(str[i]=='+'){
+    char s[]="12 10 -";
+    char *str=strtok(s," ");
+    while(str!=NULL){
+        
+        // if(strcmp(str,"+")!=0 && strcmp(str,"-")!=0 && strcmp(str,"*")!=0 && strcmp(str,"/")!=0){
+        //     stackpush(atoi(str));
+        // }
+        if(strcmp(str,"+")==0){
             int a=stackpop();
             int b=stackpop();
             stackpush(b+a);
         }
         
-        else if(str[i]=='-'){
+        else if(strcmp(str,"-")==0){
             int a=stackpop();
             int b=stackpop();
             stackpush(b-a);
         }
 
-        else if(str[i]=='*'){
+        else if(strcmp(str,"*")==0){
              int a=stackpop();
             int b=stackpop();
             stackpush(a*b);
         }
 
-        else if(str[i]=='/'){
+        else if(strcmp(str,"/")==0){
             int a=stackpop();
             int b=stackpop();
             stackpush(b/a);
         }
-        display(head);
-        printf("\n");
+        else{
+            stackpush(atoi(str));
+        }
+
+        str=strtok(NULL," ");
     }
 
+    display(head);
+    int n=10;
+     count=0;
+     stackpop();
+//     // scanf("%d",&n);
+    stackpush(5);
+    stackpush(35);
     stackpop();
-    //int n;
-    count=0;
-    // scanf("%d",&n);
-   stackpush(5);
-   stackpush(35);
-   stackpush(54);
-   stackpush(54);
-   display(head);
-    // //stackpop();
-    // peek();
-    // //display(head);
-    stackpush(26);
-    //display(head);
+    stackpop();
+    display(head);
+    stackpop();
+
+//    stackpush(54);
+//    stackpush(54);
+//    display(head);
+//    printf("\n");
+//     // //stackpop();
+//     // peek();
+//     // //display(head);
+//     stackpush(26);
+    display(head);
 }
