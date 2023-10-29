@@ -82,20 +82,15 @@ void peek(){
 
 void display(struct node*head){
     if(head==NULL){
-        printf("The Stack is empty\n");
+        //printf("The Stack is empty\n");
         return;
     }
     display(head->nxt);
     printf("%d ",head->data);
-    
-    
-    
 }
 
-int main(){
-    n=10;
-    char s[]="12 10 -";
-    char *str=strtok(s," ");
+void evalEx(char s[]){
+ char *str=strtok(s," ");
     while(str!=NULL){
         
         // if(strcmp(str,"+")!=0 && strcmp(str,"-")!=0 && strcmp(str,"*")!=0 && strcmp(str,"/")!=0){
@@ -130,18 +125,25 @@ int main(){
 
         str=strtok(NULL," ");
     }
+}
+
+int main(){
+    n=10;
+    char s[]="3 4 * 5 2 + / 6 -";
+    evalEx(s);
+   
 
     display(head);
     int n=10;
-     count=0;
-     stackpop();
-//     // scanf("%d",&n);
-    stackpush(5);
-    stackpush(35);
-    stackpop();
-    stackpop();
-    display(head);
-    stackpop();
+//      count=0;
+//      stackpop();
+// //     // scanf("%d",&n);
+//     stackpush(5);
+//     stackpush(35);
+//     stackpop();
+//     stackpop();
+//     display(head);
+//     stackpop();
 
 //    stackpush(54);
 //    stackpush(54);
@@ -151,5 +153,5 @@ int main(){
 //     // peek();
 //     // //display(head);
 //     stackpush(26);
-    display(head);
+    //display(head);
 }

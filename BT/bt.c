@@ -14,7 +14,7 @@ struct node* createNode(int indx,int*data){
             return NULL;
         }
         newNode->data=data[indx];
-        int dat=data[indx];
+        //int dat=data[indx];
         newNode->left=createNode(2*indx+1,data);
         newNode->right=createNode(2*indx+2,data);
         return newNode;
@@ -50,14 +50,28 @@ struct node* createNode(int indx,int*data){
         printf("%d ",temp->data);
     }
 
-int main(){
-    int data[]={1,2,3,4,5};
-    size=5;
+int main(int argc,char* argv[]){
+    size=argc-1;
+    int data[size];
+    printf("Given data\n");
+    for(int i=1;i<argc;i++){
+        data[i-1]=atoi(argv[i]);
+    }
+    for(int i=1;i<argc;i++){
+        printf("%d ",data[i-1]);
+    }
+    printf("\n");
+    
+    //int data[]={1,2,3,4,5};
+    
     root=createNode(0,data);
+    printf("InOrder Traversal\n");
     inOrder(root);
     printf("\n");
+            printf("PreOrder Traversal\n");
     preOrder(root);
     printf("\n");
+    printf("PostOrder Traversal\n");
     postOrder(root);
 
 }
