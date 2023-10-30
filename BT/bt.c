@@ -68,7 +68,7 @@ int main(int argc,char* argv[]){
     printf("InOrder Traversal\n");
     inOrder(root);
     printf("\n");
-            printf("PreOrder Traversal\n");
+    printf("PreOrder Traversal\n");
     preOrder(root);
     printf("\n");
     printf("PostOrder Traversal\n");
