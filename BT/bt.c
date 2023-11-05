@@ -50,20 +50,20 @@ struct node* createNode(int indx,int*data){
         printf("%d ",temp->data);
     }
 
-int main(int argc,char* argv[]){
-    size=argc-1;
-    int data[size];
-    printf("Given data\n");
-    for(int i=1;i<argc;i++){
-        data[i-1]=atoi(argv[i]);
-    }
-    for(int i=1;i<argc;i++){
-        printf("%d ",data[i-1]);
-    }
-    printf("\n");
+int main(){
+    // size=argc-1;
+    // int data[size];
+    // printf("Given data\n");
+    // for(int i=1;i<argc;i++){
+    //     data[i-1]=atoi(argv[i]);
+    // }
+    // for(int i=1;i<argc;i++){
+    //     printf("%d ",data[i-1]);
+    // }
+    // printf("\n");
     
-    //int data[]={1,2,3,4,5};
-    
+    int data[]={1,2,3,4,5};
+    size=5;
     root=createNode(0,data);
     printf("InOrder Traversal\n");
     inOrder(root);

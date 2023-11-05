@@ -41,7 +41,7 @@ struct node* helpSearch(int data,struct node*node){
     if(node==NULL){
         return NULL;
     }
-        if(node->data==data){
+    if(node->data==data){
         return node;
     }
     else{
@@ -77,7 +77,7 @@ struct node*helpInOrderSucc(int data,struct node*node,struct node*suc){
         return minSucc(node->right);
     }
     else if(node->data>data){
-        suc=node;
+        //suc=node;
         return helpInOrderSucc(data,node->left,suc);
     }
     else{
@@ -91,103 +91,123 @@ struct node*inOrderSucc(int data){
     return helpInOrderSucc(data,root,suc);
 }
 
-
-
-
-// struct node* helpDelete(int data,struct node*temp)
-   // struct node*temp;
-    // if(count==1){
-    //     temp= helpSearch(data,root);
-    //     count++;
-    // }
-    // if(temp==NULL){
-    //     return temp;
-    // }
-    
-    // //deleting node is a leaf node 
-
-    // if(temp->left==NULL && temp->right==NULL){
-    //     free(temp);
-    //     temp=NULL;
-    //     //return true;
-    // }
-
-    // //deleting node has 2 children
-    // else if(temp->left!=NULL && temp->right!=NULL){
-    //         struct node* succssor=inOrderSucc(data);
-    //         if(succssor==NULL){
-    //             return false;
-    //         }
-    //         temp->data=succssor->data;
-    //         temp->right=helpDelete(succssor->data,temp->right);
-            
-           
-            
-    //        // free(succssor);
-    //         //return temp;
-    // }
-
-    // //if one child
-    // else if(temp->left!=NULL && temp->right==NULL){
-    //     temp->data=temp->left->data;
-    //     // free(temp->left);
-    //     // temp->left=NULL;
-    //     //return true;
-    // }
-
-    // else if(temp->right!=NULL && temp->left==NULL){
-    //     temp->data=temp->right->data;
-    //     free(temp->right);
-    //     temp->right=NULL;
-    //     //return true;
-    // }
-
-    // return temp;
-    // //return succssor;
-    // // while(node->data!=data){
-    // //     if(node)
-    // // }
-
-    struct node* helpDelete(int data, struct node* node) {
-    if (node==NULL) {
-        return node; 
+struct node* retParent(struct node*node){
+    if(node==root || node==NULL){
+        return NULL;
     }
-    if (data<node->data) {
-        node->left = helpDelete(data, node->left);
-    } else if (data > node->data) {
-        node->right = helpDelete(data, node->right);
-    } else {
-        
-        if (node->left == NULL && node->right == NULL) {
-            free(node);
-            return NULL;  
+    struct node*temp=root;
+    while(temp->left!=node && temp->right!=node){
+        if(temp->data>node->data){
+            temp=temp->right;
         }
-        
-        else if (node->left != NULL && node->right != NULL) {
-            struct node* successor = inOrderSucc(data);
-            node->data = successor->data;
-            node->right = helpDelete(successor->data,node->right);
-        }
-        
-        else {
-            struct node* temp = node;
-            if (node->left != NULL) {
-                node=node->left;
-            } else {
-                node=node->right;
-            }
-            free(temp);
+        else{
+            temp=temp->left;
         }
     }
-
-    return node;
+    return temp;
 }
 
 
-void delete(int data){
-    if(root=helpDelete(data,root)){
-        printf("\nSuccessfully deleted\n");
+void helpDelete(int data,struct node*node){
+    struct node* temp=helpSearch(data,root);
+
+    
+    //deleting node is a leaf node 
+
+    if(temp->left==NULL && temp->right==NULL){
+
+        struct node* parent=retParent(temp);
+        if(parent->right==temp){
+            parent->right=NULL;
+        }
+        else{
+            parent->left=NULL;
+        }
+        free(temp);
+        //return true;
     }
+
+    //deleting node has 2 children
+    else if(temp->left!=NULL && temp->right!=NULL){
+            struct node* succssor=inOrderSucc(data);
+            temp->data=succssor->data;
+            struct node*parent=retParent(succssor);
+            if(parent->right==succssor){
+                parent->right=NULL;
+            }
+            else{
+                parent->left=NULL;
+            }
+            free(succssor);
+            return;
+            //temp->right=helpDelete(succssor->data,temp->right);
+            
+           
+            
+           //free(succssor);
+            //return temp;
+    }
+
+    //if one child
+    else if(temp->left!=NULL && temp->right==NULL){
+        temp->data=temp->left->data;
+        free(temp->left);
+        temp->left=NULL;
+        //return true;
+    }
+
+    else if(temp->right!=NULL && temp->left==NULL){
+        temp->data=temp->right->data;
+        free(temp->right);
+        temp->right=NULL;
+        return;
+        //return true;
+    }
+
+   // return temp;
+    //return succssor;
+    // while(node->data!=data){
+    //     if(node)
+    }
+
+//     struct node* helpDelete(int data, struct node* node) {
+//     if (node==NULL) {
+//         return node; 
+//     }
+//     if (data<node->data) {
+//         node->left = helpDelete(data, node->left);
+//     } else if (data > node->data) {
+//         node->right = helpDelete(data, node->right);
+//     } else {
+        
+//         if (node->left == NULL && node->right == NULL) {
+//             free(node);
+//             return NULL;  
+//         }
+        
+//         else if (node->left != NULL && node->right != NULL) {
+//             struct node* successor = inOrderSucc(data);
+//             node->data = successor->data;
+//             node->right = helpDelete(successor->data,node->right);
+//         }
+        
+//         else {
+//             struct node* temp = node;
+//             if (node->left != NULL) {
+//                 node=node->left;
+//             } else {
+//                 node=node->right;
+//             }
+//             free(temp);
+//         }
+//     }
+
+//     return node;
+// }
+
+
+void delete(int data){
+    helpDelete(data,root);
 }
 
 
@@ -209,22 +229,17 @@ void display(){
 
 
 int main(int argc,char* argv[]){
-    int nums[argc];
-
-    for(int i=1;i<argc;i++){
-        nums[i-1]=atoi(argv[i]);
-    }
-
-    for(int i=0;i<argc-1;i++){
-        insert(nums[i]);
-    }
-
     int loop=1;
     int choice;
     while(loop){
-        printf("\nEntr 2 to delete\nEntr 3 to search\nEntr 4 to display\n");
+        printf("\nEntr 1 to insert\nEntr 2 to delete\nEntr 3 to search\nEntr 4 to display\n");
         scanf("%d",&choice);
-        if(choice==2){
+        if(choice==1){
+            int data;
+            scanf("%d",&data);
+            insert(data);
+        }
+        else if(choice==2){
             int del;
             printf("Entr the data to be deleted");
             scanf("%d",&del);
@@ -239,7 +254,9 @@ int main(int argc,char* argv[]){
             }
         
         else if(choice==4){
+
             display();
+            printf("\n");
             }
         printf("Entr 0 to break");
         scanf("%d",&loop);

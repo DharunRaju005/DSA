@@ -49,7 +49,7 @@ void inOrder(struct node*temp){
     inOrder(temp->right);
 }
 
-void convertPostfix(char*s){
+void convertPostfixToInfix(char*s){
     struct node*node;
     char*str=strtok(s," ");
     while(str!=NULL){
@@ -94,14 +94,11 @@ int evalTree(struct node* temp){
 
 
 
-int main(int argc,char* argv[]){
-    if(argc!=2){
-        printf("Entr the valid input");
-        return 0;
-    }
-    //char s[]="12 3 *";
-    char* s=argv[1];
-    convertPostfix(s);
+int main(){
+
+    char s[]="12 3 * 4 3 2 - 3 / - *";
+   
+    convertPostfixToInfix(s);
     inOrder(tos);
     printf("\n");
     printf("%d",evalTree(tos));

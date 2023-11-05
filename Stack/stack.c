@@ -129,7 +129,7 @@ void evalEx(char s[]){
 
 int main(){
     n=10;
-    char s[]="3 4 * 5 2 + / 6 -";
+    char s[]="3 4 * 2 +";
     evalEx(s);
    
 
