@@ -29,7 +29,6 @@ void stackpush(int data){
         struct node*new_node=createNode(data);
         if(head==NULL){
             head=temp=new_node;
-
       }
       else{
           new_node->nxt=temp;
@@ -39,7 +38,7 @@ void stackpush(int data){
       return;
       }
       struct node*new_node=createNode(data);
-      while(temp->nxt!=0){
+      while(temp->nxt!=NULL){
           temp=temp->nxt;
       }
       temp->nxt=new_node;
@@ -129,7 +128,7 @@ void evalEx(char s[]){
 
 int main(){
     n=10;
-    char s[]="3 4 * 2 +";
+    char s[]="12 13 +";
     evalEx(s);
    
 

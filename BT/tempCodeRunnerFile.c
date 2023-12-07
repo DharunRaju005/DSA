@@ -179,6 +179,7 @@ bool checkSkew(struct node* node){
         left=left->left;
     }
     }
+    
     struct node* right=node->right;
     
     if(right!=NULL){

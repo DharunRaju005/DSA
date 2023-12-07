@@ -26,8 +26,8 @@ void insert(int num){
             i=2*i+2;
         }
         if(2*i+1>=size || 2*i+2>=size){
-            array=(int*)realloc(array,sizeof(int)*size*3);
-            size=size*3;
+            size=2*i+1;
+            array=(int*)realloc(array,sizeof(int)*size);
             for(int j=count;j<=size;j++){
                 array[j]=-1;        
             }
@@ -35,24 +35,48 @@ void insert(int num){
     }
 }
 
-void delete(int item,int index){
-    
-    if(index>size){
-        return;
+int inOrderSucc(int index){
+    while(array[2*index+1]!=-1 && 2*index+1<size){
+        index=2*index+1;
     }
-    delete(item,2*index+1);
-    if(array[index]==item){
-        array[index]=-1;
-    }
-    delete(item,2*index+2);
+    return index;
 }
 
-bool search(int item,int index){
+int inOrderPre(int index){
+    while(array[2*index+2]!=-1 && 2*index+2<size){
+        index=2*index+2;
+    }
+    return index;
+}
+
+void delete(int index){
+    if((array[2*index+1]==-1 && array[2*index+2]==-1) || 2*index+2<size || 2*index+1<size){
+        array[index]=-1;
+        return;
+    }
+    else if(array[2*index+2]!=-1){
+        int inOrderSuc=inOrderSucc(2*index+1);
+        int temp=array[index];
+        array[index]=array[inOrderSuc];
+        array[inOrderSuc]=temp;
+        return delete(inOrderSuc);
+    }
+    else{
+        int inOrderPred=inOrderPre(2*index+2);
+        int temp=array[index];
+        array[index]=array[inOrderPred];
+        array[inOrderPred]=temp;
+        return delete(inOrderPred);
+    }
+
+}
+
+int search(int item,int index){
     if(index>size){
-        return false;
+        return -1;
     }
     if(array[index]==item){
-        return true;
+        return index;
     }
     else{
         if(item<array[index]){
@@ -62,10 +86,10 @@ bool search(int item,int index){
             return search(item,2*index+2);
         }
     }
-
 }
+
 void print(int index){
-    if(index>size){
+    if(index>=size){
         return;
     }
     print(2*index+1);
@@ -75,30 +99,41 @@ void print(int index){
     print(2*index+2);
 }
 
+
 int main(){
     array=(int*)malloc(sizeof(int)*10);
     for(int i=0;i<10;i++){
         array[i]=-1;
     }
-    int nums[5]={5,2,3,6,7};
-    for(int i=0;i<5;i++){
+    int nums[5]={2,4,5,3};
+    for(int i=0;i<4;i++){
         insert(nums[i]);
     }
-    insert(1);
-    insert(9);
-    insert(4);
-    insert(15);
-    insert(14);
+    // printf("--%d ",search(4,0));
     print(0);
-    printf("\n");
-    delete(1,0);
-    delete(7,0);
-    print(0);
-    if(search(10,0)){
-        printf("True");
-    }
-    else{
-        printf("false");
-    }
+   delete(search(4,0));
+   printf("\n");
+   //delete()
+   print(0);
+  // printf("dhariun");
+    
+   // 
+   // print(0);
+    // insert(1);
+    // insert(9);
+    // insert(4);
+    // insert(15);
+    // insert(14);
+    // print(0);
+    // printf("\n");
+    // delete(1,0);
+    // delete(7,0);
+    // print(0);
+    // if(search(10,0)){
+    //     printf("True");
+    // }
+    // else{
+    //     printf("false");
+    // }
     
 }

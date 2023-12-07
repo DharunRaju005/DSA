@@ -25,6 +25,7 @@ void heapify(int* nums,int numsSize,int i){
 }
 
     void heapSort(int* nums,int numsSize){
+        //leaving the leaf nodes
         for(int i=numsSize/2-1;i>=0;i--){
             heapify(nums,numsSize,i);
         }

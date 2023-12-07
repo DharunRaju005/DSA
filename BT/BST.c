@@ -9,7 +9,6 @@ struct node{
 };
 struct node* root=NULL;
 struct node* suc=NULL;
-int count=1;
 
 struct node* createNode(int data){
     struct node* newNode=(struct node*)malloc(sizeof(struct node));
@@ -62,92 +61,43 @@ void search(int data){
     printf ("%d is not found\n",data);
 }
 
-struct node* minSucc(struct node*node){
+struct node* min(struct node*node){
     while(node->left!=NULL){
         node=node->left;
     }
     return node;
 }
 
-struct node*helpInOrderSucc(int data,struct node*node,struct node*suc){
-    if(node==NULL){
-        return suc;
-    }
-    if(node->data==data && node->right!=NULL){
-        return minSucc(node->right);
-    }
-    else if(node->data>data){
-        //suc=node;
-        return helpInOrderSucc(data,node->left,suc);
-    }
-    else{
-        return helpInOrderSucc(data,node->right,suc);
-    }
-    //return suc;
 
-}   
-
-struct node*inOrderSucc(int data){
-    return helpInOrderSucc(data,root,suc);
-}
-
-struct node* retParent(struct node*node){
-    if(node==root || node==NULL){
-        return NULL;
-    }
-    struct node*temp=root;
-    while(temp->left!=node && temp->right!=node){
-        if(temp->data>node->data){
-            temp=temp->right;
-        }
-        else{
-            temp=temp->left;
-        }
-    }
-    return temp;
-}
-
-    struct node* helpDelete(int data, struct node* node) {
-    if (node==NULL) {
-        return node; 
-    }
-    if (data<node->data) {
-        node->left = helpDelete(data, node->left);
-    } else if (data > node->data) {
-        node->right = helpDelete(data, node->right);
+struct node* del(struct node* root,int d) {
+    if (root == NULL) {
+        return root;
+    } else if (d < root->data) {
+        root->left = del(root->left, d);
+    } else if (d > root->data) {
+        root->right = del(root->right, d);
     } else {
-        
-        if (node->left == NULL && node->right == NULL) {
-            free(node);
-            return NULL;  
-        }
-        
-        else if (node->left != NULL && node->right != NULL) {
-            struct node* successor = inOrderSucc(data);
-            node->data = successor->data;
-            node->right = helpDelete(successor->data,node->right);
-        }
-        
-        else {
-            struct node* temp = node;
-            if (node->left != NULL) {
-                node=node->left;
+        if (root->left == NULL && root->right == NULL) {
+            free(root);
+            root = NULL;
+        } else if (root->left && root->right) {
+            struct node* temp = min(root->right);
+            root->data = temp->data;
+            root->right = del(root->right, temp->data);
+        } else {
+            struct node* temp;
+            if (root->left == NULL) {
+                temp = root;
+                root = root->right;
             } else {
-                node=node->right;
+                temp = root;
+                root = root->left;
             }
             free(temp);
         }
     }
-
-    return node;
+    return root;
 }
-
-
-void delete(int data){
-    helpDelete(data,root);
-}
-
-
 
 
 void helpDisplay(struct node*node){
@@ -165,38 +115,13 @@ void display(){
 
 
 
-int main(int argc,char* argv[]){
-    int loop=1;
-    int choice;
-    while(loop){
-        printf("\nEntr 1 to insert\nEntr 2 to delete\nEntr 3 to search\nEntr 4 to display\n");
-        scanf("%d",&choice);
-        if(choice==1){
-            int data;
-            scanf("%d",&data);
-            insert(data);
-        }
-        else if(choice==2){
-            int del;
-            printf("Entr the data to be deleted");
-            scanf("%d",&del);
-            delete(del);
-            }
-        
-        else if(choice==3){
-            int s;
-            printf("Entr the data to be searched");
-            scanf("%d",&s);
-            delete(s);
-            }
-        
-        else if(choice==4){
-
-            display();
-            printf("\n");
-            }
-        printf("Entr 0 to break");
-        scanf("%d",&loop);
-        }   
-         
+int main(){
+    int nums[6]={1,4,2,7,3,5};
+    for(int i=0;i<6;i++){
+        insert(nums[i]);
+    }
+    display();
+    printf("\n");
+    del(root,1);
+    display();
 }
