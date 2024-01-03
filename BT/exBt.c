@@ -1,107 +1,126 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-struct node{
+struct node
+{
     char data[100];
-    struct node*left;
-    struct node*right;
-    struct node*next;
+    struct node *left;
+    struct node *right;
+    struct node *next;
 };
-struct node*tos=NULL;
+struct node *tos = NULL;
 
-struct node* createNode(char str[]){
-    struct node*newNode=(struct node*)malloc(sizeof(struct node));
-    strcpy(newNode->data,str);
-    newNode->left=NULL;
-    newNode->right=NULL;
+struct node *createNode(char str[])
+{
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    strcpy(newNode->data, str);
+    newNode->left = NULL;
+    newNode->right = NULL;
     return newNode;
 }
-void push(struct node* node){
-    if(tos==NULL){
-        tos=node;
-        tos->next=NULL;
+void push(struct node *node)
+{
+    if (tos == NULL)
+    {
+        tos = node;
+        tos->next = NULL;
     }
-    else{
-        node->next=tos;
-        tos=node;
+    else
+    {
+        node->next = tos;
+        tos = node;
     }
 }
 
-struct node*pop(){
-    if(tos==NULL){
+struct node *pop()
+{
+    if (tos == NULL)
+    {
         return NULL;
     }
 
-    struct node*popped=tos;
-    tos=tos->next;
-    popped->next=NULL;
+    struct node *popped = tos;
+    tos = tos->next;
+    popped->next = NULL;
     return popped;
 }
 
-void inOrder(struct node*temp){
-    if(temp==NULL){
+void inOrder(struct node *temp)
+{
+    if (temp == NULL)
+    {
         return;
     }
-    //printf("%s+++\n",temp->data);
+    // printf("%s+++\n",temp->data);
     inOrder(temp->left);
-    printf("%s ",(temp->data));
+    printf("%s ", (temp->data));
     inOrder(temp->right);
 }
 
-void convertPostfixToInfix(char*s){
-    struct node*node;
-    char*str=strtok(s," ");
-    while(str!=NULL){
-        if(strcmp(str,"+")==0 ||strcmp(str,"-")==0 ||strcmp(str,"*")==0 ||strcmp(str,"/")==0){
-            node=createNode(str);
-            node->right=pop();
-            node->left=pop();
+void convertPostfixToInfix(char *s)
+{
+    struct node *node;
+    char *str = strtok(s, " ");
+    while (str != NULL)
+    {
+        if (strcmp(str, "+") == 0 || strcmp(str, "-") == 0 || strcmp(str, "*") == 0 || strcmp(str, "/") == 0 || strcmp(str, "^") == 0)
+        {
+            node = createNode(str);
+            node->right = pop();
+            node->left = pop();
             push(node);
         }
-        else{
-            node=createNode(str);
-            //printf("%s ",node->data);
+        else
+        {
+            node = createNode(str);
+            // printf("%s ",node->data);
             push(node);
         }
-        str=strtok(NULL," ");
+        str = strtok(NULL, " ");
     }
 }
 
-int evalTree(struct node* temp){
+int evalTree(struct node *temp)
+{
     // if(temp==NULL){
     //     return 0;
     // }
-    if(temp->left==NULL && temp->right==NULL){
+    if (temp->left == NULL && temp->right == NULL)
+    {
         return atoi(temp->data);
     }
-    int left=evalTree(temp->left);
-    int right=evalTree(temp->right);
-    if(strcmp(temp->data,"+")==0){
-        return left+right;
+    int left = evalTree(temp->left);
+    int right = evalTree(temp->right);
+    if (strcmp(temp->data, "+") == 0)
+    {
+        return left + right;
     }
-    if(strcmp(temp->data,"-")==0){
-        return left-right;
+    if (strcmp(temp->data, "-") == 0)
+    {
+        return left - right;
     }
-    if(strcmp(temp->data,"*")==0){
-        return left*right;
+    if (strcmp(temp->data, "*") == 0)
+    {
+        return left * right;
     }
-    else{
-        return left/right;
+    if (strcmp(temp->data, "^") == 0)
+    {
+        return pow(left,right);
+    }
+    else
+    {
+        return left / right;
     }
 }
 
+int main()
+{
 
+    char s[] = "12 13 2 * + 6 +";
 
-
-int main(){
-
-    char s[]="12 3 * 4 3 2 - 3 / - *";
-   
     convertPostfixToInfix(s);
     inOrder(tos);
-    printf("\n");
-    printf("%d",evalTree(tos));
-
     
+    printf("%d", evalTree(tos));
 }
